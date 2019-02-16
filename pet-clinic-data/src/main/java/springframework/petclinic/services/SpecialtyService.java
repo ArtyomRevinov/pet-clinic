@@ -5,5 +5,5 @@ import springframework.petclinic.model.Specialty;
 /**
  * Created by revin on 16.02.2019.
  */
-public interface SpecialtiesService extends CrudService<Specialty, Long>{
+public interface SpecialtyService extends CrudService<Specialty, Long>{
 }
