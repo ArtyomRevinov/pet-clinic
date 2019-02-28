@@ -22,7 +22,7 @@ public class Owner extends Person {
     @Column(name = "city")
     private String city;
 
-    @Column(name="telephone")
+    @Column(name = "telephone")
     private String telephone;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
@@ -36,6 +36,27 @@ public class Owner extends Person {
         this.address = address;
         this.city = city;
         this.telephone = telephone;
-        this.pets = pets;
+
+        if (pets != null) {
+            this.pets = pets;
+        }
+    }
+
+    public Pet getPet(String name) {
+        return getPet(name, false);
+    }
+
+    public Pet getPet(String name, boolean ingoreNew) {
+        name = name.toLowerCase();
+        for (Pet pet : pets) {
+            if (!ingoreNew || !pet.isNew()) {
+                String compName = pet.getName();
+                compName = compName.toLowerCase();
+                if (compName.equals(name)) {
+                    return pet;
+                }
+            }
+        }
+        return null;
     }
 }
